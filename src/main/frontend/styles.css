@@ -1,0 +1,40 @@
+// Added responsive styles and accessibility improvements
+.responsive-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+    .responsive-container {
+        padding: 0.5rem;
+    }
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Ensure proper color contrast */
+body {
+    color: #333;
+    background-color: #f8f9fa;
+}
