@@ -1,4 +1,3 @@
-
 package org.owasp.webgoat.lessons;
 
 import java.io.IOException;
@@ -232,52 +231,76 @@ public class Encoding extends LessonAdapter
 
             t.addElement(makeTitleRow("Description", "Encoded", "Decoded"));
 
-            description = "Base64 encoding is a simple reversable encoding used to encode bytes into ASCII characters. Useful for making bytes into a printable string, but provides no security.";
+            description = """
+                Base64 encoding is a simple reversable encoding used to encode bytes into ASCII characters. Useful for making bytes into a printable string, but provides no security.
+                """;
 
             // t.addElement( makeDescriptionRow( description ) );
             t.addElement(makeRow(description, base64Encode(userInput), base64Decode(userInput)));
             // t.addElement( makeSpacerRow() );
 
-            description = "Entity encoding uses special sequences like &amp;amp; for special characters. This prevents these characters from being interpreted by most interpreters.";
+            description = """
+                Entity encoding uses special sequences like &amp;amp; for special characters. This prevents these characters from being interpreted by most interpreters.
+                """;
 
             t.addElement(makeRow(description, HtmlEncoder.encode(userInput), HtmlEncoder.decode(userInput)));
 
-            description = "Password based encryption (PBE) is strong encryption with a text password. Cannot be decrypted without the password";
+            description = """
+                Password based encryption (PBE) is strong encryption with a text password. Cannot be decrypted without the password
+                """;
 
             t.addElement(makeRow(description, encryptString(userInput, userKey), decryptString(userInput, userKey)));
-            description = "MD5 hash is a checksum that can be used to validate a string or byte array, but cannot be reversed to find the original string or bytes. For obscure cryptographic reasons, it is better to use SHA-256 if you have a choice.";
+            description = """
+                MD5 hash is a checksum that can be used to validate a string or byte array, but cannot be reversed to find the original string or bytes. For obscure cryptographic reasons, it is better to use SHA-256 if you have a choice.
+                """;
 
             t.addElement(makeRow(description, hashMD5(userInput), "Cannot reverse a hash"));
 
-            description = "SHA-256 hash is a checksum that can be used to validate a string or byte array, but cannot be reversed to find the original string or bytes.";
+            description = """
+                SHA-256 hash is a checksum that can be used to validate a string or byte array, but cannot be reversed to find the original string or bytes.
+                """;
 
             t.addElement(makeRow(description, hashSHA(userInput), "N/A"));
 
-            description = "Unicode encoding is...";
+            description = """
+                Unicode encoding is...
+                """;
 
             t.addElement(makeRow(description, "Not Implemented", "Not Implemented"));
 
-            description = "URL encoding is...";
+            description = """
+                URL encoding is...
+                """;
 
             t.addElement(makeRow(description, urlEncode(userInput), urlDecode(userInput)));
 
-            description = "Hex encoding simply encodes bytes into %xx format.";
+            description = """
+                Hex encoding simply encodes bytes into %xx format.
+                """;
 
             t.addElement(makeRow(description, hexEncode(userInput), hexDecode(userInput)));
 
-            description = "Rot13 encoding is a way to make text unreadable, but is easily reversed and provides no security.";
+            description = """
+                Rot13 encoding is a way to make text unreadable, but is easily reversed and provides no security.
+                """;
 
             t.addElement(makeRow(description, rot13(userInput), rot13(userInput)));
 
-            description = "XOR with password encoding is a weak encryption scheme that mixes a password into data.";
+            description = """
+                XOR with password encoding is a weak encryption scheme that mixes a password into data.
+                """;
 
             t.addElement(makeRow(description, xorEncode(userInput, userKey), xorDecode(userInput, userKey)));
 
-            description = "Double unicode encoding is...";
+            description = """
+                Double unicode encoding is...
+                """;
 
             t.addElement(makeRow(description, "Not Implemented", "Not Implemented"));
 
-            description = "Double URL encoding is...";
+            description = """
+                Double URL encoding is...
+                """;
 
             t.addElement(makeRow(description, urlEncode(urlEncode(userInput)), urlDecode(urlDecode(userInput))));
 

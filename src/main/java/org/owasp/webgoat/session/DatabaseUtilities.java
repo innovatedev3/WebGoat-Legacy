@@ -1,4 +1,3 @@
-
 package org.owasp.webgoat.session;
 
 import java.io.IOException;
@@ -14,7 +13,9 @@ import org.apache.ecs.html.B;
 import org.apache.ecs.html.TD;
 import org.apache.ecs.html.TR;
 import org.apache.ecs.html.Table;
-
+import jakarta.transaction.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /***************************************************************************************************
  * 
@@ -47,6 +48,7 @@ import org.apache.ecs.html.Table;
  */
 public class DatabaseUtilities
 {
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseUtilities.class);
 
 	private static Map<String, Connection> connections = new HashMap<String, Connection>();
 	private static Map<String, Boolean> dbBuilt = new HashMap<String, Boolean>();
@@ -82,25 +84,25 @@ public class DatabaseUtilities
 			if (connection.getMetaData().getDatabaseProductName().toLowerCase().contains("oracle")) connection.close();
 		} catch (SQLException sqle)
 		{
-			sqle.printStackTrace();
+			logger.error("Error while returning connection for user: {}", user, sqle);
 		}
 	}
 
 	private static Connection makeConnection(String user, WebgoatContext context) throws SQLException
 	{
 		try
-	{
-		Class.forName(context.getDatabaseDriver());
+		{
+			Class.forName(context.getDatabaseDriver());
 
-		if (context.getDatabaseConnectionString().contains("hsqldb")) return getHsqldbConnection(user, context);
+			if (context.getDatabaseConnectionString().contains("hsqldb")) return getHsqldbConnection(user, context);
 
-		String userPrefix = context.getDatabaseUser();
-		String password = context.getDatabasePassword();
-		String url = context.getDatabaseConnectionString();
-		return DriverManager.getConnection(url, userPrefix + "_" + user, password);
+			String userPrefix = context.getDatabaseUser();
+			String password = context.getDatabasePassword();
+			String url = context.getDatabaseConnectionString();
+			return DriverManager.getConnection(url, userPrefix + "_" + user, password);
 		} catch (ClassNotFoundException cnfe)
 		{
-			cnfe.printStackTrace();
+			logger.error("Database driver not found for user: {}", user, cnfe);
 			throw new SQLException("Couldn't load the database driver: " + cnfe.getLocalizedMessage());
 		}
 	}
@@ -168,6 +170,17 @@ public class DatabaseUtilities
 		{
 			return (new B("Query Successful; however no data was returned from this query."));
 		}
+	}
+
+	// Example of using text blocks
+	public static String getSampleQuery() {
+		String query = """
+		    SELECT username, role
+		    FROM users
+		    WHERE active = true
+		    ORDER BY username;
+		    """;
+		return query;
 	}
 
 }

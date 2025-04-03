@@ -21,11 +21,9 @@ import org.apache.ecs.html.Input;
 import org.owasp.webgoat.session.ECSFactory;
 import org.owasp.webgoat.session.LessonTracker;
 import org.owasp.webgoat.session.WebSession;
-import javax.tools.JavaCompiler;
-import javax.tools.JavaFileObject;
-import javax.tools.SimpleJavaFileObject;
-import javax.tools.ToolProvider;
-import java.io.IOException;
+import jakarta.tools.JavaCompiler;
+import jakarta.tools.JavaFileObject;
+import jakarta.tools.SimpleJavaFileObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -389,9 +387,9 @@ public class BlindScript extends LessonAdapter
     {
     private final String programText;
 
-    public ResidentJavaFileObject( String className, String programText ) throws URISyntaxException
+    public ResidentJavaFileObject(URI className, String programText) throws URISyntaxException
         {
-        super( new URI( className + ".java" ), Kind.SOURCE );
+        super(new URI(className + ".java"), Kind.SOURCE);
         this.programText = programText;
         }
 
@@ -399,5 +397,5 @@ public class BlindScript extends LessonAdapter
         {
         return programText;
         }
-    }   
-    
+    }
+

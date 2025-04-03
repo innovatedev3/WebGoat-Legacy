@@ -1,12 +1,9 @@
-
 package org.owasp.webgoat.lessons;
 
 import java.util.ArrayList; 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.Map.Entry;
+import static java.util.Map.entry;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.ecs.Element;
@@ -59,35 +56,22 @@ import org.owasp.webgoat.session.WebSession;
 
 public class PasswordStrength extends LessonAdapter
 {
-    private Map<String, Password> passwords = new TreeMap<String, Password>() {{
-        put("pass1", new Password("123456", "seconds", "0", "dictionary based, in top 10 most used passwords"));
-        put("pass2", new Password("abzfezd", "seconds", "2", "26 chars on 7 positions, 8 billion possible combinations"));
-        put("pass3", new Password("a9z1ezd", "seconds", "19", "26 + 10 chars on 7 positions = 78 billion possible combinations"));
-        put("pass4", new Password("aB8fEzDq", "hours", "15", "26 + 26 + 10 chars on 8 positions = 218 trillion possible combinations"));
-        put("pass5", new Password("z8!E?7D$", "days", "20", "96 chars on 8 positions = 66 quintillion possible combinations"));
-        put("pass6", new Password("My1stPassword!:Redd", "quintillion years", "364", "96 chars on 19 positions = 46 undecillion possible combinations"));
-    }};
-    
-    private class Password {
-        
-        String password;
-        String timeUnit;
-        String answer;
-        private String explanation;
-        
-        public Password(String password, String timeUnit, String answer, String explanation) {
-            this.password = password;
-            this.timeUnit = timeUnit;
-            this.answer = answer;
-            this.explanation = explanation;
-        }
-    }
-    
+    private Map<String, Password> passwords = Map.ofEntries(
+        entry("pass1", new Password("123456", "seconds", "0", "dictionary based, in top 10 most used passwords")),
+        entry("pass2", new Password("abzfezd", "seconds", "2", "26 chars on 7 positions, 8 billion possible combinations")),
+        entry("pass3", new Password("a9z1ezd", "seconds", "19", "26 + 10 chars on 7 positions = 78 billion possible combinations")),
+        entry("pass4", new Password("aB8fEzDq", "hours", "15", "26 + 26 + 10 chars on 8 positions = 218 trillion possible combinations")),
+        entry("pass5", new Password("z8!E?7D$", "days", "20", "96 chars on 8 positions = 66 quintillion possible combinations")),
+        entry("pass6", new Password("My1stPassword!:Redd", "quintillion years", "364", "96 chars on 19 positions = 46 undecillion possible combinations"))
+    );
+
+    private record Password(String password, String timeUnit, String answer, String explanation) {}
+
     private boolean checkSolution(WebSession s) throws ParameterNotFoundException {
         boolean allCorrect = true;
         for ( int i = 1; i <= passwords.size(); i++ ) {
             String key = "pass" + i;
-            allCorrect = allCorrect && s.getParser().getStringParameter(key, "").equals(passwords.get(key).answer);
+            allCorrect = allCorrect && s.getParser().getStringParameter(key, "").equals(passwords.get(key).answer());
         }
         return allCorrect;
     }
@@ -115,7 +99,7 @@ public class PasswordStrength extends LessonAdapter
                 ec.addElement(new BR());
                 OL ol = new OL();
                 for ( Password password : passwords.values()) {
-                    ol.addElement(new LI(String.format("%s - %s %s (%s)", password.password, password.answer, password.timeUnit, password.explanation)));
+                    ol.addElement(new LI(String.format("%s - %s %s (%s)", password.password(), password.answer(), password.timeUnit(), password.explanation())));
                 }
                 ec.addElement(ol);
             } else
@@ -125,15 +109,15 @@ public class PasswordStrength extends LessonAdapter
                 ec.addElement(new BR());
                 ec.addElement(new BR());
                 Table table = new Table();
-                for ( Entry<String, Password> entry : passwords.entrySet()) {
+                for ( Map.Entry<String, Password> entry : passwords.entrySet()) {
                     TR tr = new TR();
                     TD td1 = new TD();
                     TD td2 = new TD();
                     Input input1 = new Input(Input.TEXT, entry.getKey(), "");
-                    td1.addElement(new StringElement("Password = " + entry.getValue().password));
+                    td1.addElement(new StringElement("Password = " + entry.getValue().password()));
                     td1.setWidth("50%");
                     td2.addElement(input1);
-                    td2.addElement(new StringElement("  " + entry.getValue().timeUnit));
+                    td2.addElement(new StringElement("  " + entry.getValue().timeUnit()));
                     tr.addElement(td1);
                     tr.addElement(td2);
                     table.addElement(tr);
@@ -174,7 +158,7 @@ public class PasswordStrength extends LessonAdapter
      * 
      * @return The ranking value
      */
-    private final static Integer DEFAULT_RANKING = new Integer(6);
+    private final static Integer DEFAULT_RANKING = 6;
 
     protected Integer getDefaultRanking()
     {
@@ -188,10 +172,12 @@ public class PasswordStrength extends LessonAdapter
 
     public String getInstructions(WebSession s)
     {
-        String instructions = "The accounts of your web application are only as safe as the passwords. "
-                + "For this exercise, your job is to test several passwords on <a onclick=\"window.open(this.href,\'_blank\');return false;\" href=\"https://howsecureismypassword.net\">https://howsecureismypassword.net</a>. "
-                + " You must test all 6 passwords at the same time...<br>"
-                + "<b> On your applications you should set good password requirements! </b>";
+        String instructions = """
+                The accounts of your web application are only as safe as the passwords. 
+                For this exercise, your job is to test several passwords on <a onclick="window.open(this.href,\'_blank\');return false;" href="https://howsecureismypassword.net">https://howsecureismypassword.net</a>. 
+                 You must test all 6 passwords at the same time...<br>
+                <b> On your applications you should set good password requirements! </b>
+                """;
         return (instructions);
     }
     

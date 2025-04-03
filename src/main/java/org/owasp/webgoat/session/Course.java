@@ -316,13 +316,12 @@ public class Course {
                     Class c = Class.forName(className);
                     Object o = c.newInstance();
 
-                    if (o instanceof AbstractLesson) {
-                        AbstractLesson lesson = (AbstractLesson) o;
+                    if (o instanceof AbstractLesson lesson) {
                         lesson.setWebgoatContext(webgoatContext);
 
                         lesson.update(properties);
 
-                        if (lesson.getHidden() == false) {
+                        if (!lesson.getHidden()) {
                             lessons.add(lesson);
                         }
                     }

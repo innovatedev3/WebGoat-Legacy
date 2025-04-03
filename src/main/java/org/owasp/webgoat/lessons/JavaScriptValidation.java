@@ -1,4 +1,3 @@
-
 package org.owasp.webgoat.lessons;
 
 import java.util.ArrayList;
@@ -89,19 +88,29 @@ public class JavaScriptValidation extends LessonAdapter
         Pattern pattern6 = Pattern.compile(regex6);
         Pattern pattern7 = Pattern.compile(regex7);
         String lineSep = System.getProperty("line.separator");
-        String script = "<SCRIPT>" + lineSep + "regex1=/" + regex1 + "/;" + lineSep + "regex2=/" + regex2 + "/;"
-                + lineSep + "regex3=/" + regex3 + "/;" + lineSep + "regex4=/" + regex4 + "/;" + lineSep + "regex5=/"
-                + regex5 + "/;" + lineSep + "regex6=/" + regex6 + "/;" + lineSep + "regex7=/" + regex7 + "/;" + lineSep
-                + "function validate() { " + lineSep + "msg='JavaScript found form errors'; err=0; " + lineSep
-                + "if (!regex1.test(document.form.field1.value)) {err+=1; msg+='\\n  bad field1';}" + lineSep
-                + "if (!regex2.test(document.form.field2.value)) {err+=1; msg+='\\n  bad field2';}" + lineSep
-                + "if (!regex3.test(document.form.field3.value)) {err+=1; msg+='\\n  bad field3';}" + lineSep
-                + "if (!regex4.test(document.form.field4.value)) {err+=1; msg+='\\n  bad field4';}" + lineSep
-                + "if (!regex5.test(document.form.field5.value)) {err+=1; msg+='\\n  bad field5';}" + lineSep
-                + "if (!regex6.test(document.form.field6.value)) {err+=1; msg+='\\n  bad field6';}" + lineSep
-                + "if (!regex7.test(document.form.field7.value)) {err+=1; msg+='\\n  bad field7';}" + lineSep
-                + "if ( err > 0 ) alert(msg);" + lineSep + "else document.form.submit();" + lineSep + "} " + lineSep
-                + "</SCRIPT>" + lineSep;
+        String script = """
+            <SCRIPT>
+            regex1=/^[a-z]{3}$/;
+            regex2=/^[0-9]{3}$/;
+            regex3=/^[a-zA-Z0-9 ]*$/;
+            regex4=/^(one|two|three|four|five|six|seven|eight|nine)$/;
+            regex5=/^\\d{5}$/;
+            regex6=/^\\d{5}(-\\d{4})?$/;
+            regex7=/^[2-9]\\d{2}-?\\d{3}-?\\d{4}$/;
+            function validate() { 
+            msg='JavaScript found form errors'; err=0; 
+            if (!regex1.test(document.form.field1.value)) {err+=1; msg+='\\n  bad field1';}
+            if (!regex2.test(document.form.field2.value)) {err+=1; msg+='\\n  bad field2';}
+            if (!regex3.test(document.form.field3.value)) {err+=1; msg+='\\n  bad field3';}
+            if (!regex4.test(document.form.field4.value)) {err+=1; msg+='\\n  bad field4';}
+            if (!regex5.test(document.form.field5.value)) {err+=1; msg+='\\n  bad field5';}
+            if (!regex6.test(document.form.field6.value)) {err+=1; msg+='\\n  bad field6';}
+            if (!regex7.test(document.form.field7.value)) {err+=1; msg+='\\n  bad field7';}
+            if ( err > 0 ) alert(msg);
+            else document.form.submit();
+            } 
+            </SCRIPT>
+            """;
         try
         {
             String param1 = s.getParser().getRawParameter("field1", "abc");
@@ -157,46 +166,60 @@ public class JavaScriptValidation extends LessonAdapter
             int err = 0;
             String msg = "";
 
-            if (!pattern1.matcher(param1).matches())
-            {
-                err++;
-                msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+" Field1.";
+            if (param1 instanceof String value1) {
+                if (!pattern1.matcher(value1).matches())
+                {
+                    err++;
+                    msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+" Field1.";
+                }
             }
 
-            if (!pattern2.matcher(param2).matches())
-            {
-                err++;
-                msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+" Field2.";
+            if (param2 instanceof String value2) {
+                if (!pattern2.matcher(value2).matches())
+                {
+                    err++;
+                    msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+" Field2.";
+                }
             }
 
-            if (!pattern3.matcher(param3).matches())
-            {
-                err++;
-                msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field3.";
+            if (param3 instanceof String value3) {
+                if (!pattern3.matcher(value3).matches())
+                {
+                    err++;
+                    msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field3.";
+                }
             }
 
-            if (!pattern4.matcher(param4).matches())
-            {
-                err++;
-                msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field4.";
+            if (param4 instanceof String value4) {
+                if (!pattern4.matcher(value4).matches())
+                {
+                    err++;
+                    msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field4.";
+                }
             }
 
-            if (!pattern5.matcher(param5).matches())
-            {
-                err++;
-                msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field5.";
+            if (param5 instanceof String value5) {
+                if (!pattern5.matcher(value5).matches())
+                {
+                    err++;
+                    msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field5.";
+                }
             }
 
-            if (!pattern6.matcher(param6).matches())
-            {
-                err++;
-                msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field6.";
+            if (param6 instanceof String value6) {
+                if (!pattern6.matcher(value6).matches())
+                {
+                    err++;
+                    msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field6.";
+                }
             }
 
-            if (!pattern7.matcher(param7).matches())
-            {
-                err++;
-                msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field7.";
+            if (param7 instanceof String value7) {
+                if (!pattern7.matcher(value7).matches())
+                {
+                    err++;
+                    msg += "<BR>"+getLabelManager().get("ServerSideValidationViolation")+"Field7.";
+                }
             }
 
             if (err > 0)
