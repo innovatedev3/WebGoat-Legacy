@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveContainer from './ResponsiveContainer';
 
 const DashboardComponent = () => {
     const [dashboardData, setDashboardData] = useState([]);
@@ -12,17 +13,21 @@ const DashboardComponent = () => {
     }, []);
 
     return (
-        <div className="dashboard-container">
-            <h1>Dashboard</h1>
-            <ul>
-                {dashboardData.map(item => (
-                    <li key={item.id}>
-                        <h2>{item.title}</h2>
-                        <p>{item.description}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ResponsiveContainer>
+            <header>
+                <h1>Dashboard</h1>
+            </header>
+            <main>
+                <ul>
+                    {dashboardData.map(item => (
+                        <li key={item.id}>
+                            <h2>{item.title}</h2>
+                            <p>{item.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </ResponsiveContainer>
     );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveContainer from './ResponsiveContainer';
 
 const AuditLogsPageComponent = () => {
     const [auditLogs, setAuditLogs] = useState([]);
@@ -12,17 +13,21 @@ const AuditLogsPageComponent = () => {
     }, []);
 
     return (
-        <div className="audit-logs-page-container">
-            <h1>Audit Logs</h1>
-            <ul>
-                {auditLogs.map(log => (
-                    <li key={log.id}>
-                        <h2>{log.action}</h2>
-                        <p>{log.timestamp}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ResponsiveContainer>
+            <header>
+                <h1>Audit Logs</h1>
+            </header>
+            <main>
+                <ul>
+                    {auditLogs.map(log => (
+                        <li key={log.id}>
+                            <h2>{log.action}</h2>
+                            <p>{log.timestamp}</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </ResponsiveContainer>
     );
 };
 

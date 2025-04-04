@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveContainer from './ResponsiveContainer';
 
 const NotificationsPageComponent = () => {
     const [notifications, setNotifications] = useState([]);
@@ -12,17 +13,21 @@ const NotificationsPageComponent = () => {
     }, []);
 
     return (
-        <div className="notifications-page-container">
-            <h1>Notifications</h1>
-            <ul>
-                {notifications.map(notification => (
-                    <li key={notification.id}>
-                        <h2>{notification.title}</h2>
-                        <p>{notification.message}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ResponsiveContainer>
+            <header>
+                <h1>Notifications</h1>
+            </header>
+            <main>
+                <ul>
+                    {notifications.map(notification => (
+                        <li key={notification.id}>
+                            <h2>{notification.title}</h2>
+                            <p>{notification.message}</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </ResponsiveContainer>
     );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveContainer from './ResponsiveContainer';
 
 const SystemStatusPageComponent = () => {
     const [systemStatus, setSystemStatus] = useState([]);
@@ -12,17 +13,21 @@ const SystemStatusPageComponent = () => {
     }, []);
 
     return (
-        <div className="system-status-page-container">
-            <h1>System Status</h1>
-            <ul>
-                {systemStatus.map(status => (
-                    <li key={status.id}>
-                        <h2>{status.component}</h2>
-                        <p>{status.status}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ResponsiveContainer>
+            <header>
+                <h1>System Status</h1>
+            </header>
+            <main>
+                <ul>
+                    {systemStatus.map(status => (
+                        <li key={status.id}>
+                            <h2>{status.component}</h2>
+                            <p>{status.status}</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </ResponsiveContainer>
     );
 };
 

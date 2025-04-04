@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveContainer from './ResponsiveContainer';
 
 const RoleManagementPageComponent = () => {
     const [roles, setRoles] = useState([]);
@@ -12,17 +13,21 @@ const RoleManagementPageComponent = () => {
     }, []);
 
     return (
-        <div className="role-management-page-container">
-            <h1>Role Management</h1>
-            <ul>
-                {roles.map(role => (
-                    <li key={role.id}>
-                        <h2>{role.name}</h2>
-                        <p>{role.description}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ResponsiveContainer>
+            <header>
+                <h1>Role Management</h1>
+            </header>
+            <main>
+                <ul>
+                    {roles.map(role => (
+                        <li key={role.id}>
+                            <h2>{role.name}</h2>
+                            <p>{role.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </ResponsiveContainer>
     );
 };
 

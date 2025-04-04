@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveContainer from './ResponsiveContainer';
 
 const HelpPageComponent = () => {
     const [helpTopics, setHelpTopics] = useState([]);
@@ -12,17 +13,21 @@ const HelpPageComponent = () => {
     }, []);
 
     return (
-        <div className="help-page-container">
-            <h1>Help Topics</h1>
-            <ul>
-                {helpTopics.map(topic => (
-                    <li key={topic.id}>
-                        <h2>{topic.title}</h2>
-                        <p>{topic.description}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ResponsiveContainer>
+            <header>
+                <h1>Help Topics</h1>
+            </header>
+            <main>
+                <ul>
+                    {helpTopics.map(topic => (
+                        <li key={topic.id}>
+                            <h2>{topic.title}</h2>
+                            <p>{topic.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </ResponsiveContainer>
     );
 };
 

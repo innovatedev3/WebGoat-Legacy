@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveContainer from './ResponsiveContainer';
 
 const FeedbackPageComponent = () => {
     const [feedbackList, setFeedbackList] = useState([]);
@@ -12,17 +13,21 @@ const FeedbackPageComponent = () => {
     }, []);
 
     return (
-        <div className="feedback-page-container">
-            <h1>Feedback</h1>
-            <ul>
-                {feedbackList.map(feedback => (
-                    <li key={feedback.id}>
-                        <h2>{feedback.user}</h2>
-                        <p>{feedback.comment}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ResponsiveContainer>
+            <header>
+                <h1>Feedback</h1>
+            </header>
+            <main>
+                <ul>
+                    {feedbackList.map(feedback => (
+                        <li key={feedback.id}>
+                            <h2>{feedback.user}</h2>
+                            <p>{feedback.comment}</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </ResponsiveContainer>
     );
 };
 

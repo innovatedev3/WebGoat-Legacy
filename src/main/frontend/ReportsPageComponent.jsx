@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ResponsiveContainer from './ResponsiveContainer';
 
 const ReportsPageComponent = () => {
     const [reports, setReports] = useState([]);
@@ -12,17 +13,21 @@ const ReportsPageComponent = () => {
     }, []);
 
     return (
-        <div className="reports-page-container">
-            <h1>Reports</h1>
-            <ul>
-                {reports.map(report => (
-                    <li key={report.id}>
-                        <h2>{report.title}</h2>
-                        <p>{report.summary}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ResponsiveContainer>
+            <header>
+                <h1>Reports</h1>
+            </header>
+            <main>
+                <ul>
+                    {reports.map(report => (
+                        <li key={report.id}>
+                            <h2>{report.title}</h2>
+                            <p>{report.summary}</p>
+                        </li>
+                    ))}
+                </ul>
+            </main>
+        </ResponsiveContainer>
     );
 };
 
