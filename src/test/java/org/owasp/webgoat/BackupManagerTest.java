@@ -1,17 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CacheManagerTest {
+class BackupManagerTest {
 
     @Test
-    void testAddToCache() {
+    void testCreateBackup() {
         // Arrange
-        CacheManager cacheManager = new CacheManager();
-        String key = "user123";
-        String value = "cachedData";
+        BackupManager backupManager = new BackupManager();
+        String backupName = "daily_backup";
 
         // Act
-        boolean result = cacheManager.addToCache(key, value);
+        boolean result = backupManager.createBackup(backupName);
 
         // Assert
         assertTrue(result);

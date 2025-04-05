@@ -1,17 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CacheManagerTest {
+class EventLoggerTest {
 
     @Test
-    void testAddToCache() {
+    void testLogEvent() {
         // Arrange
-        CacheManager cacheManager = new CacheManager();
-        String key = "user123";
-        String value = "cachedData";
+        EventLogger eventLogger = new EventLogger();
+        String event = "User logged in";
 
         // Act
-        boolean result = cacheManager.addToCache(key, value);
+        boolean result = eventLogger.logEvent(event);
 
         // Assert
         assertTrue(result);

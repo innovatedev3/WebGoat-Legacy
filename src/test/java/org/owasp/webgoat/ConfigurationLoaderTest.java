@@ -1,16 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ConfigurationManagerTest {
+class ConfigurationLoaderTest {
 
     @Test
     void testLoadConfiguration() {
         // Arrange
-        ConfigurationManager configManager = new ConfigurationManager();
-        String configFile = "app-config.json";
+        ConfigurationLoader configurationLoader = new ConfigurationLoader();
+        String configFile = "application.properties";
 
         // Act
-        boolean result = configManager.loadConfiguration(configFile);
+        boolean result = configurationLoader.loadConfiguration(configFile);
 
         // Assert
         assertTrue(result);

@@ -1,17 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CacheManagerTest {
+class ThemeManagerTest {
 
     @Test
-    void testAddToCache() {
+    void testApplyTheme() {
         // Arrange
-        CacheManager cacheManager = new CacheManager();
-        String key = "user123";
-        String value = "cachedData";
+        ThemeManager themeManager = new ThemeManager();
+        String themeName = "DarkMode";
 
         // Act
-        boolean result = cacheManager.addToCache(key, value);
+        boolean result = themeManager.applyTheme(themeName);
 
         // Assert
         assertTrue(result);

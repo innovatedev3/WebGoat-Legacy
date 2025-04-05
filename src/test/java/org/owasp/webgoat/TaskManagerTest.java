@@ -1,17 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CacheManagerTest {
+class TaskManagerTest {
 
     @Test
-    void testAddToCache() {
+    void testAddTask() {
         // Arrange
-        CacheManager cacheManager = new CacheManager();
-        String key = "user123";
-        String value = "cachedData";
+        TaskManager taskManager = new TaskManager();
+        String taskName = "GenerateReport";
 
         // Act
-        boolean result = cacheManager.addToCache(key, value);
+        boolean result = taskManager.addTask(taskName);
 
         // Assert
         assertTrue(result);

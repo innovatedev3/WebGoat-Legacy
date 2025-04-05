@@ -7,11 +7,25 @@ class PermissionManagerTest {
     void testGrantPermission() {
         // Arrange
         PermissionManager permissionManager = new PermissionManager();
-        String userId = "user123";
-        String permission = "READ";
+        String username = "testUser";
+        String permission = "read";
 
         // Act
-        boolean result = permissionManager.grantPermission(userId, permission);
+        boolean result = permissionManager.grantPermission(username, permission);
+
+        // Assert
+        assertTrue(result);
+    }
+
+    @Test
+    void testRevokePermission() {
+        // Arrange
+        PermissionManager permissionManager = new PermissionManager();
+        String username = "testUser";
+        String permission = "read";
+
+        // Act
+        boolean result = permissionManager.revokePermission(username, permission);
 
         // Assert
         assertTrue(result);

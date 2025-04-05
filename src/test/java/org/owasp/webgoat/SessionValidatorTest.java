@@ -1,17 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CacheManagerTest {
+class SessionValidatorTest {
 
     @Test
-    void testAddToCache() {
+    void testValidateSession() {
         // Arrange
-        CacheManager cacheManager = new CacheManager();
-        String key = "user123";
-        String value = "cachedData";
+        SessionValidator sessionValidator = new SessionValidator();
+        String sessionId = "session123";
 
         // Act
-        boolean result = cacheManager.addToCache(key, value);
+        boolean result = sessionValidator.validateSession(sessionId);
 
         // Assert
         assertTrue(result);

@@ -7,10 +7,51 @@ class SessionManagerTest {
     void testCreateSession() {
         // Arrange
         SessionManager sessionManager = new SessionManager();
-        String sessionId = "session123";
+        String userId = "user123";
 
         // Act
-        boolean result = sessionManager.createSession(sessionId);
+        String sessionId = sessionManager.createSession(userId);
+
+        // Assert
+        assertNotNull(sessionId);
+        assertTrue(sessionId.startsWith("sess_"));
+    }
+
+    @Test
+    void testEndSession() {
+        // Arrange
+        SessionManager sessionManager = new SessionManager();
+        String sessionId = "sess_12345";
+
+        // Act
+        boolean result = sessionManager.endSession(sessionId);
+
+        // Assert
+        assertTrue(result);
+    }
+
+    @Test
+    void testGetSessionDetails() {
+        // Arrange
+        SessionManager sessionManager = new SessionManager();
+        String sessionId = "sess_12345";
+
+        // Act
+        String sessionDetails = sessionManager.getSessionDetails(sessionId);
+
+        // Assert
+        assertNotNull(sessionDetails);
+        assertTrue(sessionDetails.contains("user123"));
+    }
+
+    @Test
+    void testInvalidateSession() {
+        // Arrange
+        SessionManager sessionManager = new SessionManager();
+        String sessionId = "sess_67890";
+
+        // Act
+        boolean result = sessionManager.invalidateSession(sessionId);
 
         // Assert
         assertTrue(result);

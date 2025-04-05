@@ -1,17 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CacheManagerTest {
+class TokenValidatorTest {
 
     @Test
-    void testAddToCache() {
+    void testValidateToken() {
         // Arrange
-        CacheManager cacheManager = new CacheManager();
-        String key = "user123";
-        String value = "cachedData";
+        TokenValidator tokenValidator = new TokenValidator();
+        String token = "validToken123";
 
         // Act
-        boolean result = cacheManager.addToCache(key, value);
+        boolean result = tokenValidator.validateToken(token);
 
         // Assert
         assertTrue(result);

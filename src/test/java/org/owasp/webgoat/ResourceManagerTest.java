@@ -1,17 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CacheManagerTest {
+class ResourceManagerTest {
 
     @Test
-    void testAddToCache() {
+    void testAddResource() {
         // Arrange
-        CacheManager cacheManager = new CacheManager();
-        String key = "user123";
-        String value = "cachedData";
+        ResourceManager resourceManager = new ResourceManager();
+        String resourceName = "Server1";
 
         // Act
-        boolean result = cacheManager.addToCache(key, value);
+        boolean result = resourceManager.addResource(resourceName);
 
         // Assert
         assertTrue(result);
