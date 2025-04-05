@@ -12,4 +12,10 @@ public class SampleLessonController {
     public String getLessonDetails() {
         return "Sample Lesson: This is a REST API endpoint for the Sample Lesson.";
     }
+
+    @GetMapping("/export")
+    public String exportLesson() {
+        SampleLesson lesson = new SampleLesson();
+        return lesson.exportLessonData();
+    }
 }

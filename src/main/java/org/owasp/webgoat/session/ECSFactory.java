@@ -1,4 +1,3 @@
-
 package org.owasp.webgoat.session;
 
 import java.util.Iterator;
@@ -741,6 +740,26 @@ public class ECSFactory
 		ec.addElement(new BR());
 
 		return (ec);
+	}
+
+	/**
+	 * Description of the Method
+	 * 
+	 * @param options
+	 *            Vector of options to be exported
+	 * @return CSV string representation of the options
+	 */
+	public static String exportToCSV(Vector<Option> options) {
+	    StringBuilder csvBuilder = new StringBuilder();
+	    csvBuilder.append("Value,Selected\n");
+
+	    for (Option option : options) {
+	        String value = option.getAttribute("value");
+	        boolean isSelected = Boolean.parseBoolean(option.getAttribute("selected"));
+	        csvBuilder.append(value).append(",").append(isSelected).append("\n");
+	    }
+
+	    return csvBuilder.toString();
 	}
 
 }
